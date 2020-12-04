@@ -1,0 +1,109 @@
+SUMO, open street maps and VANETS using ns2. 
+
+VANETs, SUMO, ns3 and open street Maps.
+
+sumo software - Install this software, refer my previous video 
+sumo 1.2.x 
+
+Compile it from the source. Download sumo.1.2.x....tar.gz 
+git clone command....
+
+
+OSM OPEN STREET MAP
+
+openstreet map is a open source web based map. This project introduce by openstreet map foundation. It is a non profit organization. It is introduce in 2004. The reason we choose openstreetmap instead of google map ,openstreetmap is a opensource and free of cost used by everyone for data collection and distributin. we used OSM to generate a real time scenerio of roads, vehicles, traffic lights etc. It can generate a sumoconfiguration file.
+
+
+
+sumo simulator:
+
+• Simulation of Urban Mobility
+– An open-source traffic simulator
+– Supports traffic flow and individual vehicles
+
+• Simulate traffic flow and vehicle movement
+– Support different kinds of vehicles and lanes
+– Support signal control and priority
+– Graphic interface
+– Multi-level output (network, lane, vehicle, detector)
+• Import road network
+– Manually design
+– Import from OpenStreetMap
+• Routing
+
+
+
+--------------------------------------------------------
+NS 3  introduction
+
+--------------------------------------------------------
+ The ns3 Simulator is a descrete event  network simulator  targeted primarily  for Research and Education purpose used
+
+ Ns3 is a open source and free
+
+ NS3 is not a backward compatible extension of ns2
+
+ it is the news simulator some model of of NS2 have already imported from ns2 to ns3
+
+NS3 is design as a set of libraries that can be combined together and also with other external software libraries 
+
+several external animator and data analysis and visualisation tools used with ns3. however users should expect to work at the command line with the C plus plus for Python software development tools
+
+ ns3 is primarily used for use on Linux although support accept for free PSD for for Windows 
+
+Nf3 is not officially supported software product of any company
+
+ Through NS3 we can generate trace file or packet capture  files which can understand by many
+
+
+
+
+
+Softwares used:
+ns-3.31
+sumo 1.7.0 
+OSM - Open street Map (osmWebWizard.py)
+
+$] cd sumo/tools
+$] python osmWebWizard.py
+ 
+Select the cars, buses, motorcycles, etc.
+and generate the scenario,
+sumo-gui automatically pops up.
+
+Step 1: Create the Sumo-gui or Sumo configuration file using the above method.
+Step 2: Create the mobility.tcl
+Step 3: run the ns2-mobility-trace.cc file with nodeNum, duration, logFile, etc.
+Step 4: Include the NetAnim Code and run the simulation.
+
+
+
+
+Step 2: Mobility.tcl file (How to create)
+$] sumo -c osm.sumocfg --fcd-output trace.xml
+$] cd && cd sumo/tools
+$] python traceExporter.py -i trace.xml --ns2mobility-output=mobility.tcl
+Now check the number of nodes in the mobility.tcl file which is very important.
+
+Move the mobility.tcl in to the /home folder (/home/sami/)
+
+Step 3: 
+The program is already in the scratch folder.
+$]cd ns-allinone-3.29/ns-3.29
+$] ./waf --run "scratch/mobility-trace --traceFile=/home/sami/mobility.tcl --nodeNum=2265 --duration=100.0 --logFile=ns2-mob.log"
+
+Step 4: include NetAnim Code
+
+#include "ns3/netanim-module.h"
+
+
+and include the following line above the Simulator::Run()
+
+AnimationInterface anim("vehicularmobility.xml");
+
+How to run NetAnim
+$] cd 
+$] cd ns-allinone-3.29/netanim-3.108/
+$] ./NetAnim 
+
+A window will be opened and select the vehicularmobility.xml and file and run the simulation. 
